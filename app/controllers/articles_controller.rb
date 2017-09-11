@@ -47,38 +47,3 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :text)
     end
 end
-
-
-def index
-  @candidates = Candidate.sorted
-end
-
-def show
-  @candidate = Candidate.find(params[:id])
-end
-
-def new
-  @candidate = Candidate.new
-end
-
-def create
-  @candidate = Candidate.new(candidate_params)
-  if @candidate.save
-    redirect_to(candidates_path)
-  else
-    render ('new')
-  end
-end
-
-def edit
-  @candidate = Candidate.find(params[:id])
-end
-
-def update
-  @candidate = Candidate.find(params[:id])
-  if @candidate.update_attributes(candidate_params)
-    redirect_to(candidate_path(@candidate))
-  else
-    render ('edit')
-  end
-end
